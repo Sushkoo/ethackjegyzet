@@ -1,0 +1,49 @@
+Parancsok/Fogalmak>
+
+/ gyokerkonyvtar
+
+abszolút hivtkozas (/jel elol): gyokerkonyvtarbol bármeddig  /home/csanad/Documents/xd.txt
+relativ hivatkozas(nincs / jel): eppen aktualis helyzetbol megyunk /home-ban vagyunk: csanad/Documents/xd.txt
+
+
+PARANCS:
+CTRL+L   - legorget (eltuntet mindent a kepernyon) / clear
+CTRL+C   - megszakit
+CTRL+D   - kilep: a terminalbol vagy a superuserbol
+
+
+mkdir    - mappa keszites PL: mkdir .cica (cica rejtett mappa)
+mkdir -p - ami nem letezik kozben azt csinald meg PL: mkdir -p /home/student/alma/korte/barack
+
+cd 'hova'- mappavaltas PL: cd /home/student/Documents
+cd ..    - eggyel feljebbi mappa
+cd       - sajat mappaba lep vissza "~"
+pwd      - hol vagyunk !fontos!
+ls       - ki listázza az aktuális mappa tartalmát
+ls 'mit' - ki listázza a mappákat amibol amit megadsz PL: ls /home
+ls -a    - rejtett fajlokat (.fajlnev) is megjelenit PL: ls -ald
+ls -l    - reszletes listazas (tulajdonos, csoport egymas utan)
+ls -d    - mappa tulajdonsagai, jogosultsagok
+
+!! history  - korabbi parancsok 2resz: memoria (most irt), regebbiek      --> !sorszam : lefuttatja azt a parancsot
+
+JOGOSULTSAGOK 3x3:
+
+- u (user)    | rwx  (r: read (listazni lehet csak), w: write (fajlbairas, mappa), x: execute (mappaba belepes))
+- g (group)   | rwx  r:4 , w:2 , x:1
+- o (other)   | rwx 
+
+
+ÁTIRÁNYÍTÁS/Fajlbairas:
+
+echo szoveg  - szovegkiiras
+echo alma > jelszo.txt -fajlbairas (felulirja a tartalmat)
+echo korte >> jelszo.txt -hozzafuz fajlbairas
+cat fajl  - fajl tartalmat kiirja (flaget majd igy lehet megnezni)
+
+echo '$(date)' : karakterrol karakterre -> output: $(date)
+echo "$(date)" : lefuttatja -> datum
+
+
+
+
