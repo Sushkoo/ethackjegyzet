@@ -1,0 +1,43 @@
+Enumeration / Reverse(shellel) - infoszerzes
+
+appok:
+
+Nmap - portok,hostok, szolgaltatasok felterkepezese(enumeracioja)
+
+mukodese:
+
+sudo nmap (localhost) jelszo Stud13
+(alapbol 1000 leggyakoribb port)
+
+pl
+22-SSH
+80-HTTP
+443-HTTPS
+20-21-FTP
+53-DNS
+23-telnet
+
+portopciok:
+-p - portok (milyen tartomanyportokat nezzen)
+-p 1-100 -tartomany
+-p 25,80 -egyes portok
+-p-  -minden port (ossz:65k)
+pl: sudo nmap -p 127.0.0.1
+
+TCP-UDP
+nmap.org
+
+sS	- TCP scan (stealth scan: csak 2 lepes a 3 iranyu kezfogasbol)
+(sudo nmap -sS -p- ip)
+sU	- UDP scan (kulon kell megadni, de lassu) - nem lesz zhn
+sV	- kérés scan, tenylegesen kommunikal a porttal
+
+sn	-noscan (nem nez portot, csak a gepeket) - ez se lesz
+O	-oprendszer, 
+
+
+--script (scriptneve) : futtatas
+--script vuln : minden ami a scripthez tartozik
+
+
+(Nessus - serulekenyseg)
