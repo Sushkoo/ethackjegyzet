@@ -49,3 +49,5 @@ https://justpaste.it/h0q80
 
 T2 ben szinten:
 python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+https://justpaste.it/h0q80
