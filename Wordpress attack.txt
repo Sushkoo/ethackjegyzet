@@ -43,5 +43,9 @@ nc -lvp 4444
 
 ranyomsz valamire amivel megrapeled az oldalt aztan
 
+
+DE ITT EGY LINK
+https://justpaste.it/h0q80
+
 T2 ben szinten:
 python3 -c 'import pty;pty.spawn("/bin/bash")'
